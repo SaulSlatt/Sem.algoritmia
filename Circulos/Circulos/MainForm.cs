@@ -19,6 +19,7 @@ namespace Circulos
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		List<Circulo> Lista = new ();
 		public MainForm()
 		{
 			//
@@ -50,30 +51,27 @@ namespace Circulos
 			Bitmap bmpcentro = new Bitmap(openFileDialog1.FileName);
 			Graphics graf = Graphics.FromImage(bmpcentro);
 			Pen pen = new Pen(Color.Violet,3);
+			Brush br = new SolidBrush(Color.Violet);
 			Color colory;
 			pictureBoximage.Image = bmpcentro;
 			
-				for( x=0; x < bmpcentro.Height; x++)
+				for( x=0; x < bmpcentro.Height; x++){
 					for( y=0; y < bmpcentro.Width; y++){//recorrer todos los pixeles
 					    colory=bmpcentro.GetPixel(y,x);
 					    if(colory.R!=255 && colory.G!=255&&colory.B!=255){//verificar que no sea blanco
-		                   BuscaCentro(y,x,bmpcentro);
-		                 
-		                   Circulo circulos = new Circulo();
-		                    
+		                   		BuscaCentro(y,x,bmpcentro);
+		                
+		                   		Circulo circulos = new Circulo();
+				   		Lista.Add(circulos);
+						graf.FillEllipse(br, rectandulo) // rectandulo necesitas crearlo y pasarle las medidas correctas
+		                    	    }
+					 }
 		                   int ra = xc+xi;
 		                   int di = xi+xf;
-		                    List<Circulo> Lista = new List<Circulo>(){
-		                   	Lista.Add(Circulo(ra,xc,yc,di));
-		                  }	
-		                 
-		                          
-					}
-					
-					    foreach(Circulo c in Lista){//recorrer la lista
-				            label1.Text = ("Centro: "+xc.ToString()+ ","+yc.ToString());
-				    }
-						
+				 }
+				 foreach(Circulo c in Lista){//recorrer la lista
+				 	label1.Text = ("Centro: "+xc.ToString()+ ","+yc.ToString());
+				 }
 		     }
 		}//BuscarCentro
 		
